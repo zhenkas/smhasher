@@ -16,7 +16,7 @@
 #include "MurmurHash1.h"
 #include <cstring>
 
-static inline uint32_t _wyr4(const unsigned char *p, uint32_t l) { uint32_t v = 0; memcpy(&v, p, l); return v;}
+static inline uint32_t _wyr4(const uint32_t *p, uint32_t l) { uint32_t v = 0; memcpy(&v, p, l); return v;}
 
 uint32_t
 MurmurHash11 (const void *key, int len, MURMUR11_CTX *seed)
@@ -25,22 +25,20 @@ MurmurHash11 (const void *key, int len, MURMUR11_CTX *seed)
   const uint64_t c2 = 0x94688D47;
   const uint64_t c3 = 0xE0B2F8B1;
   
-  const unsigned char *data = (const unsigned char *)key;
-  unsigned int k;
+  const uint32_t *data = (const uint32_t *)key;
   while (len >= 4)
     {
-      k = *(unsigned int *)data;
 
-      seed->Seed.val = ((c1 ^ seed->Seed.lo) * (c2 ^ k ^ seed->Seed.hi));
+      seed->Seed.val = ((c1 ^ seed->Seed.lo) * (c2 ^ data[0] ^ seed->Seed.hi));
 
-      data += 4;
+      data ++;
       len -= 4;
     }
 
   //----------
   if (len != 0)
   {
-      k = _wyr4(data, len);
+      uint32_t k = _wyr4(data, len);
       //----------
       seed->Seed.val = ((c1 ^ seed->Seed.lo) * (c2 ^ k ^ seed->Seed.hi));
   }
