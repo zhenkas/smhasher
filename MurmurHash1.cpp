@@ -26,10 +26,12 @@ MurmurHash11 (const void *key, int len, MURMUR11_CTX *seed)
   const uint64_t c3 = 0xE0B2F8B1;
   
   const unsigned char *data = (const unsigned char *)key;
-  while (len >= 8)
+  unsigned int k;
+  while (len >= 4)
     {
-  
-      seed->Seed.val = ((c1 ^ seed->Seed.lo) * (c2 ^ data[0] ^ seed->Seed.hi));
+      k = *(unsigned int *)data;
+
+      seed->Seed.val = ((c1 ^ seed->Seed.lo) * (c2 ^ k ^ seed->Seed.hi));
 
       data += 4;
       len -= 4;
@@ -38,7 +40,7 @@ MurmurHash11 (const void *key, int len, MURMUR11_CTX *seed)
   //----------
   if (len != 0)
   {
-      uint32_t k = _wyr4(data, len);
+      k = _wyr4(data, len);
       //----------
       seed->Seed.val = ((c1 ^ seed->Seed.lo) * (c2 ^ k ^ seed->Seed.hi));
   }
