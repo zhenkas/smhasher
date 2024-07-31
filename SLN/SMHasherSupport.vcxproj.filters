@@ -1,0 +1,271 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\AvalancheTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\Bitslice.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\Bitvec.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\chaskey.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\CityTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\City.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\crc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\DifferentialTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\HashMapTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\Hashes.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\hasshe2.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\crc32_hw.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\KeysetTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\lookup3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\md5.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\MurmurHash1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\MurmurHash2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\MurmurHash3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\Platform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\Random.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\sha1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\siphash_ssse3.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\SpeedTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\Spooky.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\SpookyTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\SpookyV2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\SpookyTestV2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\Stats.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\SuperFastHash.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\Types.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\PMurHash.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\tifuhash.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\floppsyhash.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\fasthash.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\beamsplitter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\discohash_512.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\xxhash.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\metrohash\metrohash64.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\metrohash\metrohash128.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\cmetrohash64.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\opt_cmetrohash64_1.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\farmhash.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\FarmTest.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\pearson_hash\pearson.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\t1ha\t1ha0.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\t1ha\t1ha1.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\t1ha\t1ha2.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\t1ha\t1ha0_ia32aes_noavx.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\t1ha\t1ha0_ia32aes_avx.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\t1ha\t1ha0_ia32aes_avx2.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\SHA-Intrinsics\sha1-x86.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\SHA-Intrinsics\sha256-x86.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\mum.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\jody_hash32.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\jody_hash64.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\farmhash-c.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\farmhash-c-test.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\clhash.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\blake2b.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\blake2s.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\rmd128.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\rmd160.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\rmd256.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\sha2\sha224.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\sha2\sha256.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\sha2\sha512_224.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\sha2\sha512_256.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\sha3.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\PMP_Multilinear.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\PMP_Multilinear_64.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\PMP_Multilinear_test.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\vmac.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\rijndael-alg-fst.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\blake3\blake3.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\blake3\blake3_dispatch.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\blake3\blake3_portable.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\blake3\blake3_sse41.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\blake3\blake3_avx2.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\pengyhash.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\pearson_hash\pearsonb.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\edonr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\asconhashv12\hash.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\xmsx.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\crc64.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\crcspeed.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\JKS\source\repos\zhenkas\smhasher\crccombine.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\JKS\source\repos\zhenkas\smhasher\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4BED0C04-3456-3EE6-9896-B904EF3F723D}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

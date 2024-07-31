@@ -4,6 +4,23 @@
 #include <string.h>
 #ifdef _MSC_VER
 #include <intrin.h>
+typedef union __declspec(align(16)) SIMDVec
+{
+  float m128_f32[4];    // as floats - DON'T USE. Added for convenience.
+  int8_t m128_i8[16];   // as signed 8-bit integers.
+  int16_t m128_i16[8];  // as signed 16-bit integers.
+  int32_t m128_i32[4];  // as signed 32-bit integers.
+  int64_t m128_i64[2];  // as signed 64-bit integers.
+  uint8_t m128_u8[16];  // as unsigned 8-bit integers.
+  uint16_t m128_u16[8]; // as unsigned 16-bit integers.
+  uint32_t m128_u32[4]; // as unsigned 32-bit integers.
+  uint64_t m128_u64[2]; // as unsigned 64-bit integers.
+} SIMDVec;
+
+// casting using SIMDVec
+#  define vreinterpretq_nth_u64_m128i(x, n) (((SIMDVec *)&x)->m128_u64[n])
+#  define vreinterpretq_nth_u32_m128i(x, n) (((SIMDVec *)&x)->m128_u32[n])
+#  define vreinterpretq_nth_u8_m128i(x, n) (((SIMDVec *)&x)->m128_u8[n])
 #elif defined(__aarch64__)
 #include "sse2neon.h"
 #else
@@ -294,10 +311,12 @@ uint64_t clhash(const void* random, const char * stringbyte,
 #ifdef DEBUG
     if(CLHASH_DEBUG) {
         // avoid bad seeds
-        if (memcmp(&polyvalue[0], &zero128, 8) == 0)
-            polyvalue[0]++;
-        if (memcmp(&polyvalue[1], &zero128, 8) == 0)
-            polyvalue[1]++;
+        if (memcmp (&vreinterpretq_nth_u64_m128i (polyvalue, 0), &zero128, 8)
+            == 0)
+          vreinterpretq_nth_u64_m128i (polyvalue, 0)++;
+        if (memcmp (&vreinterpretq_nth_u64_m128i (polyvalue, 1), &zero128, 8)
+            == 0)
+          vreinterpretq_nth_u64_m128i (polyvalue, 1)++;
         assert(memcmp(&rs64[1], &zero128, 8));
     }
 #endif

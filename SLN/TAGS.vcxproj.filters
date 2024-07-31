@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\JKS\source\repos\zhenkas\smhasher\SLN\CMakeFiles\2408b0f5715719938d88a652d896d99a\TAGS.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\JKS\source\repos\zhenkas\smhasher\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\JKS\source\repos\zhenkas\smhasher\SLN\CMakeFiles\TAGS" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{B716D82D-CAEB-3ED1-AEE5-E1B86A7925AE}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

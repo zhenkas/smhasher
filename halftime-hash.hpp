@@ -6,6 +6,24 @@
 #include <arm_neon.h>
 #endif
 
+typedef union __declspec (align (16)) SIMDVec
+{
+  float m128_f32[4];    // as floats - DON'T USE. Added for convenience.
+  int8_t m128_i8[16];   // as signed 8-bit integers.
+  int16_t m128_i16[8];  // as signed 16-bit integers.
+  int32_t m128_i32[4];  // as signed 32-bit integers.
+  int64_t m128_i64[2];  // as signed 64-bit integers.
+  uint8_t m128_u8[16];  // as unsigned 8-bit integers.
+  uint16_t m128_u16[8]; // as unsigned 16-bit integers.
+  uint32_t m128_u32[4]; // as unsigned 32-bit integers.
+  uint64_t m128_u64[2]; // as unsigned 64-bit integers.
+} SIMDVec;
+
+// casting using SIMDVec
+#define vreinterpretq_nth_u64_m128i(x, n) (((SIMDVec *)&x)->m128_u64[n])
+#define vreinterpretq_nth_u32_m128i(x, n) (((SIMDVec *)&x)->m128_u32[n])
+#define vreinterpretq_nth_u8_m128i(x, n) (((SIMDVec *)&x)->m128_u8[n])
+
 #include <cassert>
 #include <climits>
 #include <cstdint>
@@ -64,9 +82,9 @@ inline uint64_t Sum(u256 a) {
   auto c = _mm256_extracti128_si256(a, 0);
   auto d = _mm256_extracti128_si256(a, 1);
   c = _mm_add_epi64(c, d);
-  static_assert(sizeof(c[0]) == sizeof(uint64_t), "u256 too granular");
+  static_assert(sizeof(vreinterpretq_nth_u64_m128i (c, 0)) == sizeof(uint64_t), "u256 too granular");
   static_assert(sizeof(c) == 2 * sizeof(uint64_t), "u256 too granular");
-  return c[0] + c[1];
+  return vreinterpretq_nth_u64_m128i (c, 0) + vreinterpretq_nth_u64_m128i (c, 1);
 }
 
 struct BlockWrapper256 {
@@ -120,7 +138,6 @@ struct BlockWrapper128 {
 
 #endif
 
-#if __SSE2__
 
 using u128 = __m128i;
 
@@ -137,7 +154,11 @@ static inline u128 Negate(u128 a) {
   return Minus(zero, a);
 }
 
-inline uint64_t Sum(u128 a) { return a[0] + a[1]; }
+inline uint64_t
+Sum (u128 a)
+{
+  return vreinterpretq_nth_u64_m128i (a, 0) + vreinterpretq_nth_u64_m128i (a, 1);
+}
 
 struct BlockWrapper128 {
   using Block = u128;
@@ -150,7 +171,6 @@ struct BlockWrapper128 {
   static u128 LoadOne(uint64_t entropy) { return _mm_set1_epi64x(entropy); }
 };
 
-#endif
 
 inline uint64_t Xor(uint64_t a, uint64_t b) { return a ^ b; }
 inline uint64_t Plus(uint64_t a, uint64_t b) { return a + b; }
@@ -961,7 +981,6 @@ inline void V4Avx2(const uint64_t* entropy, const char* char_input, size_t lengt
 
 #endif
 
-#if __SSE2__
 
 template <unsigned dimension, unsigned in_width, unsigned encoded_dimension,
           unsigned out_width>
@@ -987,7 +1006,6 @@ inline void V4Sse2(const uint64_t* entropy, const char* char_input, size_t lengt
               out_width>(entropy, char_input, length, output);
 }
 
-#endif
 
 #if defined(__ARM_NEON) || defined(__ARM_NEON__)
 
@@ -1066,7 +1084,7 @@ inline void V1(const uint64_t* entropy, const char* char_input, size_t length,
   template <>                                                                        \
   inline void V##version<out_width>(const uint64_t* entropy, const char* char_input, \
                                     size_t length, uint64_t output[out_width]) {     \
-    return V##version##isa<dimension, in_width, encoded_dimension, out_width>(       \
+    V##version##isa<dimension, in_width, encoded_dimension, out_width>(       \
         entropy, char_input, length, output);                                        \
   }
 
@@ -1077,7 +1095,6 @@ inline void V1(const uint64_t* entropy, const char* char_input, size_t length,
   SPECIALIZE(version, isa, 2, 6, 3, 7)
 
 #if __AVX512F__
-
 SPECIALIZE_4(4, Avx512)
 SPECIALIZE_4(3, Avx2)
 SPECIALIZE_4(2, Sse2)
