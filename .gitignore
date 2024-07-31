@@ -38,3 +38,11 @@ prof.h
 /blake3/test_vectors.json
 
 *.swp
+.vs
+/SLN/Debug
+/SLN/Release
+/SLN/SMHasher.dir
+/SLN/SMHasherSupport.dir
+/SLN/x64
+/SLN/CMakeFiles
+/out
