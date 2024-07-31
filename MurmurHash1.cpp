@@ -14,6 +14,39 @@
 //    machines.
 
 #include "MurmurHash1.h"
+#include <cstring>
+
+static inline uint32_t _wyr4(const unsigned char *p, uint32_t l) { uint32_t v = 0; memcpy(&v, p, l); return v;}
+
+uint32_t
+MurmurHash11 (const void *key, int len, MURMUR11_CTX *seed)
+{
+  const uint64_t c1 = 0x9AD11405;
+  const uint64_t c2 = 0x94688D47;
+  const uint64_t c3 = 0xE0B2F8B1;
+  
+  const unsigned char *data = (const unsigned char *)key;
+  while (len >= 8)
+    {
+  
+      seed->Seed.val = ((c1 ^ seed->Seed.lo) * (c2 ^ data[0] ^ seed->Seed.hi));
+
+      data += 4;
+      len -= 4;
+    }
+
+  //----------
+  if (len != 0)
+  {
+      uint32_t k = _wyr4(data, len);
+      //----------
+      seed->Seed.val = ((c1 ^ seed->Seed.lo) * (c2 ^ k ^ seed->Seed.hi));
+  }
+
+  seed->Seed.val = ((c1 ^ seed->Seed.lo) * (c2 ^ len ^ seed->Seed.hi)) ^ c3;
+  
+  return seed->Seed.hi ^ seed->Seed.lo;
+} 
 
 //-----------------------------------------------------------------------------
 

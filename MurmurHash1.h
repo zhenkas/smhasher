@@ -25,8 +25,22 @@ typedef unsigned __int64 uint64_t;
 #endif // !defined(_MSC_VER)
 
 //-----------------------------------------------------------------------------
+struct MURMUR11_CTX
+{
+  union
+  {
+    struct
+    {
+        uint32_t lo;
+        uint32_t hi;
+    };
+    uint64_t val;
+  } Seed;
+  MURMUR11_CTX (uint32_t seed) : Seed{ seed } {}
+};
 
 uint32_t MurmurHash1        ( const void * key, int len, uint32_t seed );
+uint32_t MurmurHash11 (const void *key, int len, MURMUR11_CTX * seed);
 uint32_t MurmurHash1Aligned ( const void * key, int len, uint32_t seed );
 
 //-----------------------------------------------------------------------------
