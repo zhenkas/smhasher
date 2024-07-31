@@ -21,29 +21,34 @@ static inline uint32_t _wyr4(const uint32_t *p, uint32_t l) { uint32_t v = 0; me
 uint32_t
 MurmurHash11 (const void *key, int len, MURMUR11_CTX *seed)
 {
-  const uint64_t c1 = 0x9AD11405;
-  const uint64_t c2 = 0x94688D47;
-  const uint64_t c3 = 0xE0B2F8B1;
+  const uint64_t c1 = 0xA263ACD3;
+  const uint64_t c2 = 0xCD5233A5;
   
   const uint32_t *data = (const uint32_t *)key;
-  while (len >= 4)
+  int len2 = len;
+  seed->Seed.val = ((c1 ^ seed->Seed.lo) * (c2 ^ len2 ^ seed->Seed.hi));
+  while (len >= 8)
     {
 
-      seed->Seed.val = ((c1 ^ seed->Seed.lo) * (c2 ^ data[0] ^ seed->Seed.hi));
+      seed->Seed.val = ((c1 ^ data[0]^ seed->Seed.lo) * (c2 ^ data[1] ^ seed->Seed.hi));
 
+      data += 2;
+      len -= 8;
+    }
+  if (len >= 4)
+    {
+      seed->Seed.val = ((c1 ^ seed->Seed.lo) * (c2 ^ data[0]^ seed->Seed.hi));
       data ++;
       len -= 4;
     }
-
   //----------
   if (len != 0)
   {
       uint32_t k = _wyr4(data, len);
-      //----------
       seed->Seed.val = ((c1 ^ seed->Seed.lo) * (c2 ^ k ^ seed->Seed.hi));
   }
 
-  seed->Seed.val = ((c1 ^ seed->Seed.lo) * (c2 ^ len ^ seed->Seed.hi)) ^ c3;
+  seed->Seed.val = ((c1 ^ seed->Seed.lo) * (c2 ^ len2 ^ seed->Seed.hi));
   
   return seed->Seed.hi ^ seed->Seed.lo;
 } 

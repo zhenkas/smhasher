@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LocalDebuggerCommandArguments>--test=Avalanche,MomentChi2 Murmur11</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>--test=PerlinNoise,MomentChi2,Avalanche,Permutations Murmur11</LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LocalDebuggerCommandArguments>--test=MomentChi2 Murmur11</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>--test=PerlinNoise Murmur11</LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
 </Project>

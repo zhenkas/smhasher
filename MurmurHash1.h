@@ -36,7 +36,7 @@ struct MURMUR11_CTX
     };
     uint64_t val;
   } Seed;
-  MURMUR11_CTX (uint32_t seed) : Seed{ seed } {}
+  MURMUR11_CTX (uint32_t seed) : Seed{ seed, seed } {}
 };
 
 uint32_t MurmurHash1        ( const void * key, int len, uint32_t seed );
