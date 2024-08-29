@@ -305,8 +305,7 @@ inline void MurmurHash1_test ( const void * key, int len, uint32_t seed, void * 
 inline void
 MurmurHash11_test (const void *key, int len, uint32_t seed, void *out)
 {
-  MURMUR11_CTX ctx = seed;
-  *(uint32_t *)out = MurmurHash11 (key, len, &ctx);
+  *(uint32_t *)out = MurmurHash11 (key, len, seed);
 }
 
 inline void MurmurHash2_test ( const void * key, int len, uint32_t seed, void * out )

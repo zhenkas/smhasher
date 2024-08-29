@@ -224,6 +224,7 @@
 #include <stdint.h>
 #endif
 
+#include <intrin.h>
 /*****************************************************************************/
 
 #if defined(i386) || defined(__386) || defined(__i386) || defined(__i386__) || \

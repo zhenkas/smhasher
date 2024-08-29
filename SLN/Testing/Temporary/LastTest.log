@@ -1,0 +1,429 @@
+Start testing: Aug 30 00:47 Jerusalem Daylight Time
+----------------------------------------------------------
+1/6 Testing: VerifyAll
+1/6 Test: VerifyAll
+Command: "C:/Users/JKS/source/repos/zhenkas/smhasher/SLN/Release/SMHasher.exe" "--test=VerifyAll"
+Directory: C:/Users/JKS/source/repos/zhenkas/smhasher/SLN
+"VerifyAll" start time: Aug 30 00:47 Jerusalem Daylight Time
+Output:
+----------------------------------------------------------
+[[[ VerifyAll Tests ]]]
+
+Self-test FAILED!
+         donothing32 - Verification value 0x00000000 ....... INSECURE (should not be 0)
+         donothing64 - Verification value 0x00000000 ....... INSECURE (should not be 0)
+        donothing128 - Verification value 0x00000000 ....... INSECURE (should not be 0)
+     NOP_OAAT_read64 - Verification value 0x00000000 ....... INSECURE (should not be 0)
+             BadHash - Verification value 0xAB432E23 ....... PASS
+             sumhash - Verification value 0x0000A9AC ....... PASS
+           sumhash32 - Verification value 0x3D6DC280 ....... PASS
+      multiply_shift - Verification value 0xFCE355A6 ....... PASS
+ pair_multiply_shift - Verification value 0xD4B20347 ....... PASS
+               crc32 - Verification value 0x3719DB20 ....... PASS
+             md5-128 - Verification value 0xF263F96F ....... PASS
+              md5_64 - Verification value 0x12F0BA8E ....... PASS
+              md5_32 - Verification value 0xF3DFF19F ....... PASS
+            sha1-160 - Verification value 0xED2F35E4 ....... PASS
+             sha1_32 - Verification value 0x480A2B09 ....... SKIP (self- or unseeded)
+             sha1_64 - Verification value 0x296A3B95 ....... SKIP (self- or unseeded)
+            sha2-224 - Verification value 0x407AA518 ....... PASS
+         sha2-224_64 - Verification value 0xF3E40ECA ....... PASS
+            sha2-256 - Verification value 0xEBDA2FB1 ....... PASS
+         sha2-256_64 - Verification value 0xC1C4FA72 ....... PASS
+              sha1ni - Verification value 0x375755A4 ....... PASS
+           sha1ni_32 - Verification value 0xE70686CC ....... PASS
+          sha2ni-256 - Verification value 0x4E3BB25E ....... PASS
+       sha2ni-256_64 - Verification value 0xF938E80E ....... PASS
+              rmd128 - Verification value 0xFF576977 ....... PASS
+              rmd160 - Verification value 0x30B37AC6 ....... PASS
+              rmd256 - Verification value 0xEB16FAD7 ....... PASS
+            edonr224 - Verification value 0x83A8E7AB ....... PASS
+            edonr256 - Verification value 0x06DD4F96 ....... PASS
+            blake3_c - Verification value 0x50E4CD91 ....... PASS
+         blake2s-128 - Verification value 0xE8D8FCDF ....... PASS
+         blake2s-160 - Verification value 0xD50FF144 ....... PASS
+         blake2s-224 - Verification value 0x19B36D2C ....... PASS
+         blake2s-256 - Verification value 0x841D6354 ....... PASS
+      blake2s-256_64 - Verification value 0x53000BB2 ....... PASS
+         blake2b-160 - Verification value 0x28ADDA30 ....... PASS
+         blake2b-224 - Verification value 0x101A62A4 ....... PASS
+         blake2b-256 - Verification value 0xC9D8D995 ....... PASS
+      blake2b-256_64 - Verification value 0xCF4F7EC3 ....... PASS
+        asconhashv12 - Verification value 0xA969C160 ....... PASS
+     asconhashv12_64 - Verification value 0xE7DEF300 ....... PASS
+            sha3-256 - Verification value 0x21048CE3 ....... PASS
+         sha3-256_64 - Verification value 0xE62E5CC0 ....... PASS
+             hasshe2 - Verification value 0xF5D39DFE ....... PASS
+     poly_1_mersenne - Verification value 0x00000000 ....... INSECURE (should not be 0)
+     poly_2_mersenne - Verification value 0x00000000 ....... INSECURE (should not be 0)
+     poly_3_mersenne - Verification value 0x00000000 ....... INSECURE (should not be 0)
+     poly_4_mersenne - Verification value 0x00000000 ....... INSECURE (should not be 0)
+          tabulation - Verification value 0x320F17C5 ....... FAIL! (Expected 0xb49c607c)
+        tabulation32 - Verification value 0x3C3B7BDD ....... PASS
+            crc32_hw - Verification value 0x0C7346F0 ....... FAIL! (Expected 0xc2b84071)
+            crc64_hw - Verification value 0xE7C3FD0E ....... FAIL! (Expected 0x6bbc19d6)
+        crc64_jones1 - Verification value 0x7DC1B496 ....... PASS
+        crc64_jones2 - Verification value 0x7DC1B496 ....... PASS
+        crc64_jones3 - Verification value 0x7DC1B496 ....... PASS
+         crc64_jones - Verification value 0x7DC1B496 ....... PASS
+              o1hash - Verification value 0x85051E87 ....... PASS
+           fibonacci - Verification value 0xFE3BD380 ....... PASS
+               FNV1a - Verification value 0xE3CBBE91 ....... PASS
+   FNV1A_Totenschiff - Verification value 0x95D95ACF ....... PASS
+  FNV1A_Pippip_Yurii - Verification value 0xE79AE3E4 ....... PASS
+            FNV1a_YT - Verification value 0xD8AFFD71 ....... PASS
+               FNV64 - Verification value 0x103455FC ....... PASS
+              FNV128 - Verification value 0xBCAA1426 ....... PASS
+                FNV2 - Verification value 0x1967C625 ....... PASS
+           fletcher2 - Verification value 0x890767C0 ....... PASS
+           fletcher4 - Verification value 0x890767C0 ....... PASS
+           bernstein - Verification value 0xBDB4B640 ....... PASS
+                sdbm - Verification value 0x582AF769 ....... PASS
+                 x17 - Verification value 0x8128E14C ....... PASS
+           libiberty - Verification value 0x584FBC20 ....... PASS
+                 gcc - Verification value 0xC6239327 ....... PASS
+         JenkinsOOAT - Verification value 0x83E133DA ....... PASS
+    JenkinsOOAT_perl - Verification value 0xEE05869B ....... PASS
+      pearsonbhash64 - Verification value 0xB6FF2DFC ....... PASS
+     pearsonbhash128 - Verification value 0x6BEFE6EA ....... PASS
+     pearsonbhash256 - Verification value 0x999B3C19 ....... PASS
+            VHASH_32 - Verification value 0xF0077651 ....... PASS
+            VHASH_64 - Verification value 0xF97D84FE ....... PASS
+           MicroOAAT - Verification value 0x16F1BA97 ....... PASS
+             farsh32 - Verification value 0xBCDE332C ....... PASS
+             farsh64 - Verification value 0xDE2FDAEE ....... PASS
+            farsh128 - Verification value 0x82B6CBEC ....... PASS
+            farsh256 - Verification value 0xFEBEA0BC ....... PASS
+          jodyhash32 - Verification value 0xA2AEFC60 ....... PASS
+          jodyhash64 - Verification value 0xC1CBFA34 ....... PASS
+             lookup3 - Verification value 0x3D83917A ....... PASS
+           superfast - Verification value 0x0C80403A ....... PASS
+          MurmurOAAT - Verification value 0x5363BD98 ....... PASS
+               Crap8 - Verification value 0x743E97A1 ....... PASS
+            xxHash32 - Verification value 0xBA88B743 ....... PASS
+             Murmur1 - Verification value 0x9EA7D056 ....... PASS
+            Murmur11 - Verification value 0x18F2C87B ....... FAIL! (Expected 0x51d22835)
+             Murmur2 - Verification value 0x27864C1E ....... PASS
+            Murmur2A - Verification value 0x7FBD4396 ....... PASS
+            Murmur2B - Verification value 0x1F0D3804 ....... PASS
+            Murmur2C - Verification value 0xDD537C05 ....... PASS
+            Murmur3A - Verification value 0xB0F57EE3 ....... PASS
+          PMurHash32 - Verification value 0xB0F57EE3 ....... PASS
+            Murmur3C - Verification value 0xB3ECE62A ....... PASS
+            PMPML_32 - Verification value 0xEAE2E3CC ....... PASS
+            PMPML_64 - Verification value 0x584CC9DF ....... PASS
+              City32 - Verification value 0xEDED9084 ....... PASS
+         metrohash64 - Verification value 0x6FA828C9 ....... PASS
+       metrohash64_1 - Verification value 0xEE88F7D2 ....... PASS
+       metrohash64_2 - Verification value 0xE1FC7C6E ....... PASS
+        metrohash128 - Verification value 0x4A6673E7 ....... PASS
+      metrohash128_1 - Verification value 0x20E8A1D7 ....... PASS
+      metrohash128_2 - Verification value 0x5437C684 ....... PASS
+        City64noSeed - Verification value 0x4C4E54B1 ....... PASS
+              City64 - Verification value 0x5FABC5C5 ....... PASS
+          t1ha1_64le - Verification value 0xD6836381 ....... PASS
+          t1ha1_64be - Verification value 0x93F864DE ....... PASS
+          t1ha0_32le - Verification value 0x7F7D7B29 ....... PASS
+          t1ha0_32be - Verification value 0xDA6A4061 ....... PASS
+         tifuhash_64 - Verification value 0x823D51B6 ....... FAIL! (Expected 0x644236d4)
+        beamsplitter - Verification value 0x1BDF358B ....... PASS
+          discohash1 - Verification value 0xBEBB4185 ....... PASS
+      discohash1-128 - Verification value 0x05C0460C ....... PASS
+          discohash2 - Verification value 0x8FF45ABF ....... PASS
+      discohash2-128 - Verification value 0x95E58C14 ....... PASS
+           discoNONG - Verification value 0x9182A886 ....... PASS
+          fasthash32 - Verification value 0xE9481AFC ....... PASS
+          fasthash64 - Verification value 0xA16231A7 ....... PASS
+         floppsyhash - Verification value 0x7FF80000 ....... SKIP (self- or unseeded)
+             chaskey - Verification value 0x84B3764E ....... FAIL! (Expected 0x81a90131)
+             SipHash - Verification value 0xC58D7F9C ....... PASS
+         HalfSipHash - Verification value 0xA7A05F72 ....... PASS
+            GoodOAAT - Verification value 0x7B14EEE5 ....... PASS
+       prvhash64_64m - Verification value 0xD37C7E74 ....... PASS
+        prvhash64_64 - Verification value 0xD37C7E74 ....... PASS
+       prvhash64_128 - Verification value 0xB447480F ....... PASS
+       prvhash64s_64 - Verification value 0x891521D6 ....... PASS
+      prvhash64s_128 - Verification value 0x0199728A ....... PASS
+           SipHash13 - Verification value 0x29C010BF ....... PASS
+              clhash - Verification value 0xFF27B919 ....... SKIP (self- or unseeded)
+            Murmur3F - Verification value 0x6384BA69 ....... PASS
+                 MUM - Verification value 0xA973C6C0 ....... PASS
+              MUMlow - Verification value 0x7F898826 ....... PASS
+              xmsx32 - Verification value 0x6B54E1D4 ....... PASS
+             mirhash - Verification value 0x00A393C8 ....... FAIL! (Expected 0x422a66fc)
+        mirhash32low - Verification value 0xE320CE68 ....... FAIL! (Expected 0xd50d1f09)
+       mirhashstrict - Verification value 0x422A66FC ....... PASS
+  mirhashstrict32low - Verification value 0xD50D1F09 ....... PASS
+           City64low - Verification value 0x6C4EF416 ....... PASS
+             City128 - Verification value 0x305C0D9A ....... PASS
+          CityCrc128 - Verification value 0x98C09AB4 ....... PASS
+          CityCrc256 - Verification value 0x2A7036C8 ....... PASS
+          FarmHash32 - Verification value 0x47AB39AF ....... SKIP (self- or unseeded)
+          FarmHash64 - Verification value 0xEBC4A679 ....... PASS
+         FarmHash128 - Verification value 0x305C0D9A ....... PASS
+        farmhash32_c - Verification value 0x47AB39AF ....... SKIP (self- or unseeded)
+        farmhash64_c - Verification value 0xEBC4A679 ....... PASS
+       farmhash128_c - Verification value 0x305C0D9A ....... PASS
+            xxHash64 - Verification value 0x024B7CF4 ....... PASS
+            Spooky32 - Verification value 0x3F798BBB ....... PASS
+            Spooky64 - Verification value 0xA7F955F1 ....... PASS
+           Spooky128 - Verification value 0x8D263080 ....... PASS
+         SpookyV2_32 - Verification value 0xA48BE265 ....... PASS
+         SpookyV2_64 - Verification value 0x972C4BDC ....... PASS
+        SpookyV2_128 - Verification value 0x893CFCBE ....... PASS
+           pengyhash - Verification value 0x1FC2217B ....... PASS
+                 mx3 - Verification value 0x4DB51E5B ....... PASS
+     halftime_hash64 - Verification value 0x55F2A08F ....... SKIP (self- or unseeded)
+    halftime_hash128 - Verification value 0x43EEC3D3 ....... SKIP (self- or unseeded)
+    halftime_hash256 - Verification value 0x554BF6A9 ....... SKIP (self- or unseeded)
+    halftime_hash512 - Verification value 0x0EB4F87B ....... SKIP (self- or unseeded)
+        t1ha2_atonce - Verification value 0x8F16C948 ....... PASS
+        t1ha2_stream - Verification value 0xDED9B580 ....... PASS
+     t1ha2_atonce128 - Verification value 0xB44C43A1 ....... PASS
+     t1ha2_stream128 - Verification value 0xE929E756 ....... PASS
+                xxh3 - Verification value 0x39CD9E4A ....... PASS
+             xxh3low - Verification value 0xFAE8467B ....... PASS
+              xxh128 - Verification value 0xEB61B3A0 ....... PASS
+           xxh128low - Verification value 0x54D1CC70 ....... PASS
+         wyhash32low - Verification value 0xC5DF9AA0 ....... PASS
+              wyhash - Verification value 0x9DAE7DD3 ....... PASS
+           rapidhash - Verification value 0xAF404C4B ....... PASS
+  rapidhash_unrolled - Verification value 0xAF404C4B ....... PASS
+            nmhash32 - Verification value 0x12A30553 ....... PASS
+           nmhash32x - Verification value 0xA8580227 ....... PASS
+            komihash - Verification value 0x8157FF6D ....... PASS
+             polymur - Verification value 0x4F894810 ....... PASS
+<end of output>
+Test time =   0.16 sec
+----------------------------------------------------------
+Test Failed.
+"VerifyAll" end time: Aug 30 00:47 Jerusalem Daylight Time
+"VerifyAll" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/6 Testing: Sanity
+2/6 Test: Sanity
+Command: "C:/Users/JKS/source/repos/zhenkas/smhasher/SLN/Release/SMHasher.exe" "--test=Sanity"
+Directory: C:/Users/JKS/source/repos/zhenkas/smhasher/SLN
+"Sanity" start time: Aug 30 00:47 Jerusalem Daylight Time
+Output:
+----------------------------------------------------------
+--- Testing xxh3 "xxHash v3, 64-bit" GOOD
+
+[[[ Sanity Tests ]]]
+
+Verification value 0x39CD9E4A ....... PASS
+Running sanity check 1     .......... PASS
+Running AppendedZeroesTest .......... PASS
+
+
+Input vcode 0x00000001, Output vcode 0x00000001, Result vcode 0x00000001
+Verification value is 0x00000001 - Testing took 0.919000 seconds
+<end of output>
+Test time =   0.93 sec
+----------------------------------------------------------
+Test Passed.
+"Sanity" end time: Aug 30 00:47 Jerusalem Daylight Time
+"Sanity" time elapsed: 00:00:00
+----------------------------------------------------------
+
+3/6 Testing: Speed
+3/6 Test: Speed
+Command: "C:/Users/JKS/source/repos/zhenkas/smhasher/SLN/Release/SMHasher.exe" "--test=Speed"
+Directory: C:/Users/JKS/source/repos/zhenkas/smhasher/SLN
+"Speed" start time: Aug 30 00:47 Jerusalem Daylight Time
+Output:
+----------------------------------------------------------
+--- Testing xxh3 "xxHash v3, 64-bit" GOOD
+
+[[[ Speed Tests ]]]
+
+Bulk speed test - 262144-byte keys
+Alignment  7 - 22.071 bytes/cycle - 63147.05 MiB/sec @ 3 ghz
+Alignment  6 - 21.914 bytes/cycle - 62696.93 MiB/sec @ 3 ghz
+Alignment  5 - 21.922 bytes/cycle - 62719.73 MiB/sec @ 3 ghz
+Alignment  4 - 22.182 bytes/cycle - 63463.96 MiB/sec @ 3 ghz
+Alignment  3 - 22.010 bytes/cycle - 62972.49 MiB/sec @ 3 ghz
+Alignment  2 - 21.705 bytes/cycle - 62099.15 MiB/sec @ 3 ghz
+Alignment  1 - 21.744 bytes/cycle - 62210.44 MiB/sec @ 3 ghz
+Alignment  0 - 23.906 bytes/cycle - 68396.16 MiB/sec @ 3 ghz
+Average      - 22.182 bytes/cycle - 63463.24 MiB/sec @ 3 ghz
+
+Small key speed test -    1-byte keys -    18.00 cycles/hash
+Small key speed test -    2-byte keys -    18.00 cycles/hash
+Small key speed test -    3-byte keys -    18.00 cycles/hash
+Small key speed test -    4-byte keys -    20.00 cycles/hash
+Small key speed test -    5-byte keys -    20.00 cycles/hash
+Small key speed test -    6-byte keys -    20.00 cycles/hash
+Small key speed test -    7-byte keys -    20.00 cycles/hash
+Small key speed test -    8-byte keys -    20.00 cycles/hash
+Small key speed test -    9-byte keys -    17.99 cycles/hash
+Small key speed test -   10-byte keys -    17.98 cycles/hash
+Small key speed test -   11-byte keys -    17.99 cycles/hash
+Small key speed test -   12-byte keys -    17.98 cycles/hash
+Small key speed test -   13-byte keys -    17.98 cycles/hash
+Small key speed test -   14-byte keys -    17.97 cycles/hash
+Small key speed test -   15-byte keys -    17.98 cycles/hash
+Small key speed test -   16-byte keys -    17.98 cycles/hash
+Small key speed test -   17-byte keys -    19.00 cycles/hash
+Small key speed test -   18-byte keys -    19.27 cycles/hash
+Small key speed test -   19-byte keys -    19.00 cycles/hash
+Small key speed test -   20-byte keys -    19.00 cycles/hash
+Small key speed test -   21-byte keys -    19.31 cycles/hash
+Small key speed test -   22-byte keys -    19.33 cycles/hash
+Small key speed test -   23-byte keys -    19.30 cycles/hash
+Small key speed test -   24-byte keys -    19.16 cycles/hash
+Small key speed test -   25-byte keys -    19.34 cycles/hash
+Small key speed test -   26-byte keys -    19.28 cycles/hash
+Small key speed test -   27-byte keys -    19.30 cycles/hash
+Small key speed test -   28-byte keys -    19.30 cycles/hash
+Small key speed test -   29-byte keys -    19.00 cycles/hash
+Small key speed test -   30-byte keys -    19.00 cycles/hash
+Small key speed test -   31-byte keys -    19.43 cycles/hash
+Average                                    18.899 cycles/hash
+
+
+Input vcode 0x00000001, Output vcode 0x00000001, Result vcode 0x00000001
+Verification value is 0x00000001 - Testing took 3.759000 seconds
+<end of output>
+Test time =   3.77 sec
+----------------------------------------------------------
+Test Passed.
+"Speed" end time: Aug 30 00:47 Jerusalem Daylight Time
+"Speed" time elapsed: 00:00:03
+----------------------------------------------------------
+
+4/6 Testing: Cyclic
+4/6 Test: Cyclic
+Command: "C:/Users/JKS/source/repos/zhenkas/smhasher/SLN/Release/SMHasher.exe" "--test=Cyclic"
+Directory: C:/Users/JKS/source/repos/zhenkas/smhasher/SLN
+"Cyclic" start time: Aug 30 00:47 Jerusalem Daylight Time
+Output:
+----------------------------------------------------------
+--- Testing xxh3 "xxHash v3, 64-bit" GOOD
+
+[[[ Keyset 'Cyclic' Tests ]]]
+
+Keyset 'Cyclic' - 8 cycles of 8 bytes - 1000000 keys
+Testing collisions ( 64-bit) - Expected    0.0, actual      0 (0.00x)
+Testing collisions (high 32-bit) - Expected        116.4, actual    125 (1.07x) (9)
+Testing collisions (high 23-34 bits) - Worst is 34 bits: 37/29 (1.27x)
+Testing collisions (low  32-bit) - Expected        116.4, actual    107 (0.92x)
+Testing collisions (low  23-34 bits) - Worst is 23 bits: 57758/57305 (1.01x)
+Testing distribution - Worst bias is the 17-bit window at bit 22 - 0.126%
+
+Keyset 'Cyclic' - 8 cycles of 9 bytes - 1000000 keys
+Testing collisions ( 64-bit) - Expected    0.0, actual      0 (0.00x)
+Testing collisions (high 32-bit) - Expected        116.4, actual    110 (0.94x)
+Testing collisions (high 23-34 bits) - Worst is 23 bits: 57337/57305 (1.00x)
+Testing collisions (low  32-bit) - Expected        116.4, actual    116 (1.00x)
+Testing collisions (low  23-34 bits) - Worst is 31 bits: 243/232 (1.04x)
+Testing distribution - Worst bias is the 17-bit window at bit 18 - 0.179%
+
+Keyset 'Cyclic' - 8 cycles of 10 bytes - 1000000 keys
+Testing collisions ( 64-bit) - Expected    0.0, actual      0 (0.00x)
+Testing collisions (high 32-bit) - Expected        116.4, actual    126 (1.08x) (10)
+Testing collisions (high 23-34 bits) - Worst is 33 bits: 66/58 (1.13x)
+Testing collisions (low  32-bit) - Expected        116.4, actual    124 (1.07x) (8)
+Testing collisions (low  23-34 bits) - Worst is 31 bits: 276/232 (1.19x)
+Testing distribution - Worst bias is the 17-bit window at bit 14 - 0.111%
+
+Keyset 'Cyclic' - 8 cycles of 11 bytes - 1000000 keys
+Testing collisions ( 64-bit) - Expected    0.0, actual      0 (0.00x)
+Testing collisions (high 32-bit) - Expected        116.4, actual    135 (1.16x) (19)
+Testing collisions (high 23-34 bits) - Worst is 34 bits: 40/29 (1.37x)
+Testing collisions (low  32-bit) - Expected        116.4, actual    135 (1.16x) (19)
+Testing collisions (low  23-34 bits) - Worst is 33 bits: 78/58 (1.34x)
+Testing distribution - Worst bias is the 17-bit window at bit 40 - 0.143%
+
+Keyset 'Cyclic' - 8 cycles of 12 bytes - 1000000 keys
+Testing collisions ( 64-bit) - Expected    0.0, actual      0 (0.00x)
+Testing collisions (high 32-bit) - Expected        116.4, actual    120 (1.03x) (4)
+Testing collisions (high 23-34 bits) - Worst is 33 bits: 65/58 (1.12x)
+Testing collisions (low  32-bit) - Expected        116.4, actual    108 (0.93x)
+Testing collisions (low  23-34 bits) - Worst is 34 bits: 34/29 (1.17x)
+Testing distribution - Worst bias is the 17-bit window at bit 48 - 0.167%
+
+Keyset 'Cyclic' - 8 cycles of 16 bytes - 1000000 keys
+Testing collisions ( 64-bit) - Expected    0.0, actual      0 (0.00x)
+Testing collisions (high 32-bit) - Expected        116.4, actual    114 (0.98x)
+Testing collisions (high 23-34 bits) - Worst is 26 bits: 7495/7413 (1.01x)
+Testing collisions (low  32-bit) - Expected        116.4, actual    110 (0.94x)
+Testing collisions (low  23-34 bits) - Worst is 34 bits: 32/29 (1.10x)
+Testing distribution - Worst bias is the 17-bit window at bit 28 - 0.080%
+
+
+
+Input vcode 0x00000001, Output vcode 0x00000001, Result vcode 0x00000001
+Verification value is 0x00000001 - Testing took 2.504000 seconds
+<end of output>
+Test time =   2.51 sec
+----------------------------------------------------------
+Test Passed.
+"Cyclic" end time: Aug 30 00:47 Jerusalem Daylight Time
+"Cyclic" time elapsed: 00:00:02
+----------------------------------------------------------
+
+5/6 Testing: Zeroes
+5/6 Test: Zeroes
+Command: "C:/Users/JKS/source/repos/zhenkas/smhasher/SLN/Release/SMHasher.exe" "--test=Zeroes"
+Directory: C:/Users/JKS/source/repos/zhenkas/smhasher/SLN
+"Zeroes" start time: Aug 30 00:47 Jerusalem Daylight Time
+Output:
+----------------------------------------------------------
+--- Testing xxh3 "xxHash v3, 64-bit" GOOD
+
+[[[ Keyset 'Zeroes' Tests ]]]
+
+Keyset 'Zeroes' - 204800 keys
+Testing collisions ( 64-bit) - Expected    0.0, actual      0 (0.00x)
+Testing collisions (high 32-bit) - Expected          4.9, actual      1 (0.20x)
+Testing collisions (high 21-29 bits) - Worst is 22 bits: 4848/4919 (0.99x)
+Testing collisions (low  32-bit) - Expected          4.9, actual      6 (1.23x) (2)
+Testing collisions (low  21-29 bits) - Worst is 27 bits: 175/156 (1.12x)
+Testing distribution - Worst bias is the 15-bit window at bit 48 - 0.332%
+
+
+
+Input vcode 0x00000001, Output vcode 0x00000001, Result vcode 0x00000001
+Verification value is 0x00000001 - Testing took 0.262000 seconds
+<end of output>
+Test time =   0.27 sec
+----------------------------------------------------------
+Test Passed.
+"Zeroes" end time: Aug 30 00:47 Jerusalem Daylight Time
+"Zeroes" time elapsed: 00:00:00
+----------------------------------------------------------
+
+6/6 Testing: Seed
+6/6 Test: Seed
+Command: "C:/Users/JKS/source/repos/zhenkas/smhasher/SLN/Release/SMHasher.exe" "--test=Seed"
+Directory: C:/Users/JKS/source/repos/zhenkas/smhasher/SLN
+"Seed" start time: Aug 30 00:47 Jerusalem Daylight Time
+Output:
+----------------------------------------------------------
+--- Testing xxh3 "xxHash v3, 64-bit" GOOD
+
+[[[ Keyset 'Seed' Tests ]]]
+
+Keyset 'Seed' - 5000000 keys
+Testing collisions ( 64-bit) - Expected    0.0, actual      0 (0.00x)
+Testing collisions (high 32-bit) - Expected       2909.3, actual   2931 (1.01x) (22)
+Testing collisions (high 26-39 bits) - Worst is 38 bits: 51/45 (1.12x)
+Testing collisions (low  32-bit) - Expected       2909.3, actual   2936 (1.01x) (27)
+Testing collisions (low  26-39 bits) - Worst is 37 bits: 99/90 (1.09x)
+Testing distribution - Worst bias is the 19-bit window at bit 55 - 0.054%
+
+
+
+Input vcode 0x00000001, Output vcode 0x00000001, Result vcode 0x00000001
+Verification value is 0x00000001 - Testing took 1.707000 seconds
+<end of output>
+Test time =   1.72 sec
+----------------------------------------------------------
+Test Passed.
+"Seed" end time: Aug 30 00:47 Jerusalem Daylight Time
+"Seed" time elapsed: 00:00:01
+----------------------------------------------------------
+
+End testing: Aug 30 00:47 Jerusalem Daylight Time

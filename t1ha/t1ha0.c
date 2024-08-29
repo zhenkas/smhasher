@@ -371,8 +371,20 @@ static __cold uint64_t x86_cpu_features(void) {
       __cpuid_count(7, 0, eax, extended, ecx, edx);
   }
 #elif defined(_MSC_VER)
+  #ifdef __clang__
+  union
+  {
+    char text[16];
+    uint32_t reg[4];
+  } vender = { .text = { 0 } };
+  uint32_t idmax = 0;
+  // id=0: idmax=eax, VenderID:ebx.edx.ecx
+  __cpuid (0, idmax, vender.reg[0], vender.reg[2], vender.reg[1]);
+  int *info = (int *) vender.reg;
+  #else
   int info[4];
   __cpuid(info, 0);
+  #endif
   const unsigned cpuid_max = info[0];
   if (cpuid_max >= 1) {
     __cpuidex(info, 1, 0);
