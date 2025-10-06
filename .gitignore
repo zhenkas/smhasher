@@ -38,7 +38,7 @@ prof.h
 /blake3/test_vectors.json
 
 *.swp
-.vs
+.vs*
 /SLN/Debug
 /SLN/Release
 /SLN/SMHasher.dir

@@ -46,4 +46,14 @@ uint32_t MurmurHash1Aligned ( const void * key, int len, uint32_t seed );
 
 //-----------------------------------------------------------------------------
 
+struct MURMUR22_CTX
+{
+    uint64_t lo;
+    uint64_t hi;
+    MURMUR22_CTX (uint64_t seed) : lo{ seed } {}
+    MURMUR22_CTX (uint64_t l, uint64_t h) : lo (l), hi (h) {}
+};
+
+uint64_t MurmurHash22 (const void *key, int len, uint64_t seed);
+
 #endif // _MURMURHASH1_H_
