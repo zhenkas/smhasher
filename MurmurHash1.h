@@ -36,7 +36,7 @@ struct MURMUR11_CTX
     };
     uint64_t val;
   } Seed;
-  MURMUR11_CTX (uint64_t seed) : Seed{ seed } {}
+  MURMUR11_CTX (uint32_t seed) : Seed{ seed } {}
   MURMUR11_CTX (uint32_t lo, uint32_t hi) : Seed{ lo, hi} {}
 };
 

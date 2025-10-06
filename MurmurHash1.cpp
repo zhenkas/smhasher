@@ -16,6 +16,7 @@
 #include "MurmurHash1.h"
 #include <cstring>
 #include <cstdlib>
+#include "t1ha/t1ha_bits.h"
 
 static inline uint32_t
 _wyr4 (const uint32_t *p, uint32_t k)
@@ -35,6 +36,47 @@ _wyr4_shift (const uint32_t *p, int shift)
   ((c1 ^ seed.Seed.lo ^ data) * (c2 ^ seed.Seed.hi))
 #define murmix2(c1, c2, seed, data1, data2)                                   \
   ((c1 ^ data1 ^ seed.Seed.lo) * (c2 ^ data2 ^ seed.Seed.hi))
+
+//murmur22
+
+static inline uint64_t
+_wyr4 (const MURMUR22_CTX *p, uint32_t k) // k = 1..4
+{
+  const uint8_t *pb = (const uint8_t *)p;
+  return (((uint64_t)pb[0]) << 16) | (((uint64_t)pb[k >> 1]) << 8) | pb[k - 1];
+}
+
+static inline uint64_t
+_wyr8 (const MURMUR22_CTX *p, uint32_t k) // k = 4..8
+{
+  const uint8_t *pb = (const uint8_t *)p;
+  return (((uint64_t)(*(uint32_t *)(pb)))) | (((uint64_t)(*(uint32_t *)(pb + k - 4))) << 32);
+}
+
+static inline MURMUR22_CTX
+_wyr12 (const MURMUR22_CTX *p, uint32_t k) // k = 9..12
+{
+  const uint8_t *pb = (const uint8_t *)p;
+  return { *(uint64_t *)pb, *(uint32_t *)(pb + k - 4) };
+}
+
+static inline MURMUR22_CTX
+_wyr16 (const MURMUR22_CTX *p, uint32_t k) // k = 13..16
+{
+  const uint8_t *pb = (const uint8_t *)p;
+  return { *(uint64_t *)pb, *(uint64_t *)(pb + k - 8) };
+}
+
+static inline void MurMix22 (const MURMUR22_CTX &c1, const MURMUR22_CTX &data, MURMUR22_CTX &seed)
+{
+  seed.lo = _umul128(c1.lo ^ seed.lo ^ data.lo, c1.hi ^ seed.hi ^ data.hi, &seed.hi);
+}
+
+static inline void
+MurMix22 (const MURMUR22_CTX &c1, const uint64_t data, MURMUR22_CTX &seed)
+{
+  seed.lo = _umul128 (c1.lo ^ seed.lo ^ data, c1.hi ^ seed.hi, &seed.hi);
+}
 
 uint32_t
 MurmurHash11 (const void *key, int len, uint32_t s)
@@ -320,4 +362,74 @@ MurmurHash1Aligned (const void *key, int len, unsigned int seed)
   h ^= h >> 17;
 
   return h;
+}
+
+__declspec(noinline) uint64_t
+MurmurHash22 (const void *key, int len, uint64_t s)
+{
+  const MURMUR22_CTX c1 = { 0xBCE4612B72AC7CD1ull, 0x25ADEF6B6E2E405Bull };
+  const MURMUR22_CTX c2 = { 0xE79E42E49A26BF54ull, 0xB9514DE371D1EF91ull };
+  const MURMUR22_CTX c3 = { 0xA5CA7F36AEF2D6ACull, 0x36EB3E7AC58EC945ull };
+  const MURMUR22_CTX c4 = { 0xD941C3FAD76A43C5ull, 0xA65318A851EF65B9ull };
+
+  MURMUR22_CTX seed = { s ^ c4.hi, s ^ c4.lo };
+
+  const MURMUR22_CTX *data = (const MURMUR22_CTX *)key;
+  int len2 = len;
+  while (true) {
+      if (len < 64)
+        {
+          if (len < 4)
+          {
+              if (len != 0)
+              {
+                  MurMix22 (c1, _wyr4 (data, len), seed);
+                  MurMix22 (c4, len2, seed);
+              }
+              else
+              {
+                  MurMix22 (c4, len2, seed);
+              }
+              return seed.lo ^ seed.hi;
+          }
+          if (len <= 8)
+          {
+              MurMix22 (c1, _wyr8 (data, len), seed);
+              MurMix22 (c4, len2, seed);
+              return seed.lo ^ seed.hi;
+          }
+          if (len <= 12)
+          {
+              MurMix22 (c1, _wyr12 (data, len), seed);
+              MurMix22 (c4, len2, seed);
+              return seed.lo ^ seed.hi;
+          }
+          if (len <= 16)
+          {
+              MurMix22 (c1, _wyr16 (data, len), seed);
+              MurMix22 (c4, len2, seed);
+              return seed.lo ^ seed.hi;
+          }   
+
+          MurMix22 (c1, _wyr16 (data, 16), seed);
+          len -= 16;
+          data++;
+          continue;
+      }   
+      MURMUR22_CTX see1 = seed;
+      MURMUR22_CTX see2 = seed;
+      MURMUR22_CTX see3 = seed;
+      do
+        {
+          MurMix22 (c1, data[0], seed);
+          MurMix22 (c2, data[1], see1);
+          MurMix22 (c3, data[2], see2);
+          MurMix22 (c4, data[3], see3);
+          data += 4;
+          len -= 64;
+        }
+      while (len >= 64);
+      seed.lo ^= see1.lo ^ see2.lo ^ see3.lo;
+      seed.hi ^= see1.hi ^ see2.hi ^ see3.hi;
+  }
 }

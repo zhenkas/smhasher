@@ -6,11 +6,11 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\JKS\source\repos\zhenkas\smhasher\CMakeLists.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <Filter Include="Source Files">
       <UniqueIdentifier>{4BED0C04-3456-3EE6-9896-B904EF3F723D}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="C:\Users\JKS\source\repos\zhenkas\smhasher\CMakeLists.txt" />
   </ItemGroup>
 </Project>

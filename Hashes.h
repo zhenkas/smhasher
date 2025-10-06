@@ -308,6 +308,12 @@ MurmurHash11_test (const void *key, int len, uint32_t seed, void *out)
   *(uint32_t *)out = MurmurHash11 (key, len, seed);
 }
 
+inline void
+MurmurHash22_test (const void *key, int len, uint32_t seed, void *out)
+{
+  *(uint64_t *)out = MurmurHash22 (key, len, seed);
+}
+
 inline void MurmurHash2_test ( const void * key, int len, uint32_t seed, void * out )
 {
   *(uint32_t*)out = MurmurHash2(key,len,seed);
@@ -963,25 +969,25 @@ inline void rmd256(const void *key, int len, uint32_t seed, void *out)
   rmd256_process(&ltc_state, (unsigned char *)key, len);
   rmd256_done(&ltc_state, (unsigned char *)out);
 }
-#include "edonr.h"
-inline void edonr224(const void *key, int len, uint32_t seed, void *out)
-{
-  // objsize
-  struct edonr_ctx ctx;
-  rhash_edonr224_init(&ctx);
-  ctx.u.data256.hash[0] ^= seed;
-  rhash_edonr256_update(&ctx, (unsigned char *)key, len);
-  rhash_edonr256_final(&ctx, (unsigned char *)out);
-}
-inline void edonr256(const void *key, int len, uint32_t seed, void *out)
-{
-  // objsize
-  struct edonr_ctx ctx;
-  rhash_edonr256_init(&ctx);
-  ctx.u.data256.hash[0] ^= seed;
-  rhash_edonr256_update(&ctx, (unsigned char *)key, len);
-  rhash_edonr256_final(&ctx, (unsigned char *)out);
-}
+// #include "edonr.h"
+// inline void edonr224(const void *key, int len, uint32_t seed, void *out)
+// {
+//   // objsize
+//   struct edonr_ctx ctx;
+//   rhash_edonr224_init(&ctx);
+//   ctx.u.data256.hash[0] ^= seed;
+//   rhash_edonr256_update(&ctx, (unsigned char *)key, len);
+//   rhash_edonr256_final(&ctx, (unsigned char *)out);
+// }
+// inline void edonr256(const void *key, int len, uint32_t seed, void *out)
+// {
+//   // objsize
+//   struct edonr_ctx ctx;
+//   rhash_edonr256_init(&ctx);
+//   ctx.u.data256.hash[0] ^= seed;
+//   rhash_edonr256_update(&ctx, (unsigned char *)key, len);
+//   rhash_edonr256_final(&ctx, (unsigned char *)out);
+// }
 // Keccak:
 inline void sha3_256_64(const void *key, int len, uint32_t seed, void *out)
 {
@@ -1150,28 +1156,28 @@ void farsh128_test ( const void * key, int len, unsigned seed, void * out );
 void farsh256_test ( const void * key, int len, unsigned seed, void * out );
 #endif
 
-extern "C" {
-#include "blake3/blake3_impl.h"
-// The C API, serially
-  inline void blake3c_test ( const void * key, int len, unsigned seed, void * out )
-  {
-    blake3_hasher hasher;
-#if 1
-    blake3_hasher_init (&hasher);
-    // See GH #168
-    hasher.key[0] ^= (uint32_t)seed;
-    hasher.chunk.cv[0] ^= (uint32_t)seed;
-#else
-    // same speed
-    uint32_t seed_key[8] = {0x6A09E667 ^ (uint32_t)seed, 0xBB67AE85, 0x3C6EF372,
-      0xA54FF53A, 0x510E527F, 0x9B05688C,
-      0x1F83D9AB, 0x5BE0CD19};    // Copied the default IV from blake3_impl.h
-    blake3_hasher_init_keyed(&hasher, (uint8_t*)seed_key); // Changed to the KEYED variant
-#endif
-    blake3_hasher_update (&hasher, (uint8_t*)key, (size_t)len);
-    blake3_hasher_finalize (&hasher, (uint8_t*)out, BLAKE3_OUT_LEN);
-  }
-}
+// extern "C" {
+// #include "blake3/blake3_impl.h"
+// // The C API, serially
+//   inline void blake3c_test ( const void * key, int len, unsigned seed, void * out )
+//   {
+//     blake3_hasher hasher;
+// #if 1
+//     blake3_hasher_init (&hasher);
+//     // See GH #168
+//     hasher.key[0] ^= (uint32_t)seed;
+//     hasher.chunk.cv[0] ^= (uint32_t)seed;
+// #else
+//     // same speed
+//     uint32_t seed_key[8] = {0x6A09E667 ^ (uint32_t)seed, 0xBB67AE85, 0x3C6EF372,
+//       0xA54FF53A, 0x510E527F, 0x9B05688C,
+//       0x1F83D9AB, 0x5BE0CD19};    // Copied the default IV from blake3_impl.h
+//     blake3_hasher_init_keyed(&hasher, (uint8_t*)seed_key); // Changed to the KEYED variant
+// #endif
+//     blake3_hasher_update (&hasher, (uint8_t*)key, (size_t)len);
+//     blake3_hasher_finalize (&hasher, (uint8_t*)out, BLAKE3_OUT_LEN);
+//   }
+// }
 
 #ifdef HAVE_BLAKE3
 // The Rust API, parallized

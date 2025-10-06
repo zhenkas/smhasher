@@ -144,18 +144,18 @@ HashInfo g_hashes[] =
 { rmd128,              128, 0xFF576977, "rmd128",       "RIPEMD-128", GOOD, {} },
 { rmd160,              160, 0x30B37AC6, "rmd160",       "RIPEMD-160", GOOD, {} },
 { rmd256,              256, 0xEB16FAD7, "rmd256",       "RIPEMD-256", GOOD, {} },
-{ edonr224,            224, 0x83A8E7AB, "edonr224",     "EDON-R 224", GOOD, {} },
-{ edonr256,            256, 0x06DD4F96, "edonr256",     "EDON-R 256", GOOD, {} },
+//{ edonr224,            224, 0x83A8E7AB, "edonr224",     "EDON-R 224", GOOD, {} },
+//{ edonr256,            256, 0x06DD4F96, "edonr256",     "EDON-R 256", GOOD, {} },
 #if defined(HAVE_BIT32) && !defined(_WIN32)
 #  define BLAKE3_VERIF   0x58571F56
 #else
 #  define BLAKE3_VERIF   0x50E4CD91
 #endif
-{ blake3c_test,        256, BLAKE3_VERIF, "blake3_c",   "BLAKE3 c",   GOOD, {0x6a09e667} },
-#if defined(HAVE_BLAKE3)
-{ blake3_test,         256, 0x0, "blake3",       "BLAKE3 Rust", GOOD, {} },
-{ blake3_64,            64, 0x0, "blake3_64",    "BLAKE3 Rust, low 64 bits", GOOD, {} },
-#endif
+//{ blake3c_test,        256, BLAKE3_VERIF, "blake3_c",   "BLAKE3 c",   GOOD, {0x6a09e667} },
+// #if defined(HAVE_BLAKE3)
+// { blake3_test,         256, 0x0, "blake3",       "BLAKE3 Rust", GOOD, {} },
+// { blake3_64,            64, 0x0, "blake3_64",    "BLAKE3 Rust, low 64 bits", GOOD, {} },
+// #endif
 { blake2s128_test,     128, 0xE8D8FCDF, "blake2s-128",  "blake2s-128", GOOD, {} },
 { blake2s160_test,     160, 0xD50FF144, "blake2s-160",  "blake2s-160", GOOD, {} },
 { blake2s224_test,     224, 0x19B36D2C, "blake2s-224",  "blake2s-224", GOOD, {} },
@@ -329,6 +329,7 @@ HashInfo g_hashes[] =
 { xxHash32_test,        32, 0xBA88B743, "xxHash32",    "xxHash, 32-bit for x86", POOR, {} },
 { MurmurHash1_test,     32, 0x9EA7D056, "Murmur1",     "MurmurHash1", POOR, {0xc6a4a793} /* !! */ },
 { MurmurHash11_test,    32, 0x0D770CF7, "Murmur11",     "MurmurHash11", POOR, {0xc6a4a793} /* !! */ },
+{ MurmurHash22_test,    64, 0x4E50072B, "Murmur22",     "MurmurHash22", POOR, {0xc6a4a793} /* !! */ },
 { MurmurHash2_test,     32, 0x27864C1E, "Murmur2",     "MurmurHash2 for x86, 32-bit", POOR,
   {0x10} /* !! */ },
 { MurmurHash2A_test,    32, 0x7FBD4396, "Murmur2A",    "MurmurHash2A for x86, 32-bit", POOR,
