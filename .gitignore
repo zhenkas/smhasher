@@ -41,6 +41,7 @@ prof.h
 .vs*
 /SLN/Debug
 /SLN/Release
+/SLN/RelWithDebInfo
 /SLN/SMHasher.dir
 /SLN/SMHasherSupport.dir
 /SLN/x64

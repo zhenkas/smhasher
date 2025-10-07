@@ -23,6 +23,7 @@ typedef unsigned __int64 uint64_t;
 #include <stdint.h>
 
 #endif // !defined(_MSC_VER)
+#include <cstring>
 
 //-----------------------------------------------------------------------------
 struct MURMUR11_CTX
@@ -45,14 +46,15 @@ uint32_t MurmurHash11 (const void *key, int len, uint32_t seed);
 uint32_t MurmurHash1Aligned ( const void * key, int len, uint32_t seed );
 
 //-----------------------------------------------------------------------------
-
+#pragma pack(push, 1)
 struct MURMUR22_CTX
 {
     uint64_t lo;
     uint64_t hi;
-    MURMUR22_CTX (uint64_t seed) : lo{ seed } {}
+    MURMUR22_CTX (const uint8_t *p) { memcpy (this, p, 16); }    
     MURMUR22_CTX (uint64_t l, uint64_t h) : lo (l), hi (h) {}
 };
+#pragma pack(pop)
 
 uint64_t MurmurHash22 (const void *key, int len, uint64_t seed);
 

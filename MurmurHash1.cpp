@@ -17,6 +17,7 @@
 #include <cstring>
 #include <cstdlib>
 #include "t1ha/t1ha_bits.h"
+#include <algorithm>
 
 static inline uint32_t
 _wyr4 (const uint32_t *p, uint32_t k)
@@ -38,45 +39,6 @@ _wyr4_shift (const uint32_t *p, int shift)
   ((c1 ^ data1 ^ seed.Seed.lo) * (c2 ^ data2 ^ seed.Seed.hi))
 
 //murmur22
-
-static inline uint64_t
-_wyr4 (const MURMUR22_CTX *p, uint32_t k) // k = 1..4
-{
-  const uint8_t *pb = (const uint8_t *)p;
-  return (((uint64_t)pb[0]) << 16) | (((uint64_t)pb[k >> 1]) << 8) | pb[k - 1];
-}
-
-static inline uint64_t
-_wyr8 (const MURMUR22_CTX *p, uint32_t k) // k = 4..8
-{
-  const uint8_t *pb = (const uint8_t *)p;
-  return (((uint64_t)(*(uint32_t *)(pb)))) | (((uint64_t)(*(uint32_t *)(pb + k - 4))) << 32);
-}
-
-static inline MURMUR22_CTX
-_wyr12 (const MURMUR22_CTX *p, uint32_t k) // k = 9..12
-{
-  const uint8_t *pb = (const uint8_t *)p;
-  return { *(uint64_t *)pb, *(uint32_t *)(pb + k - 4) };
-}
-
-static inline MURMUR22_CTX
-_wyr16 (const MURMUR22_CTX *p, uint32_t k) // k = 13..16
-{
-  const uint8_t *pb = (const uint8_t *)p;
-  return { *(uint64_t *)pb, *(uint64_t *)(pb + k - 8) };
-}
-
-static inline void MurMix22 (const MURMUR22_CTX &c1, const MURMUR22_CTX &data, MURMUR22_CTX &seed)
-{
-  seed.lo = _umul128(c1.lo ^ seed.lo ^ data.lo, c1.hi ^ seed.hi ^ data.hi, &seed.hi);
-}
-
-static inline void
-MurMix22 (const MURMUR22_CTX &c1, const uint64_t data, MURMUR22_CTX &seed)
-{
-  seed.lo = _umul128 (c1.lo ^ seed.lo ^ data, c1.hi ^ seed.hi, &seed.hi);
-}
 
 uint32_t
 MurmurHash11 (const void *key, int len, uint32_t s)
@@ -364,69 +326,130 @@ MurmurHash1Aligned (const void *key, int len, unsigned int seed)
   return h;
 }
 
-__declspec(noinline) uint64_t
+
+static inline uint32_t
+load32u (const uint8_t *p)
+{
+  uint32_t v;
+  memcpy (&v, p, 4);
+  return v;
+}
+static inline uint64_t
+load64u (const uint8_t *p)
+{
+  uint64_t v;
+  memcpy (&v, p, 8);
+  return v;
+}
+
+// k = 1..3  (classic wyhash pattern)
+static inline uint64_t
+_wyr3 (const uint8_t *p, uint32_t k)
+{
+  return ((uint64_t)p[0] << 16) | ((uint64_t)p[k >> 1] << 8) | p[k - 1];
+}
+
+// k = 4..8
+static inline uint64_t
+_wyr8 (const uint8_t *p, uint32_t k)
+{
+  return (uint64_t)load32u (p) | ((uint64_t)load32u (p + k - 4) << 32);
+}
+
+// k = 9..12
+static inline MURMUR22_CTX
+_wyr12 (const uint8_t *p, uint32_t k)
+{
+  uint64_t lo = load64u (p);
+  uint64_t hi = 0;
+  memcpy (&hi, p + k - 4, 4);
+  return { lo, hi };
+}
+
+// k = 13..16
+static inline MURMUR22_CTX
+_wyr16 (const uint8_t *p, uint32_t k)
+{
+  uint64_t lo = load64u (p);
+  uint64_t hi = load64u (p + k - 8);
+  return { lo, hi };
+}
+
+static inline void
+MurMix22 (const MURMUR22_CTX &c, const MURMUR22_CTX &d, MURMUR22_CTX &s)
+{
+  s.lo ^= _umul128 (c.lo ^ s.lo ^ d.lo, c.hi ^ s.hi ^ d.hi, &s.hi);
+}
+static inline uint64_t
+MurmurHash22_Finalize (const MURMUR22_CTX &s)
+{
+  return s.lo ^ s.hi;
+}
+
+uint64_t
 MurmurHash22 (const void *key, int len, uint64_t s)
 {
-  const MURMUR22_CTX c1 = { 0xBCE4612B72AC7CD1ull, 0x25ADEF6B6E2E405Bull };
-  const MURMUR22_CTX c2 = { 0xE79E42E49A26BF54ull, 0xB9514DE371D1EF91ull };
-  const MURMUR22_CTX c3 = { 0xA5CA7F36AEF2D6ACull, 0x36EB3E7AC58EC945ull };
-  const MURMUR22_CTX c4 = { 0xD941C3FAD76A43C5ull, 0xA65318A851EF65B9ull };
+  const MURMUR22_CTX c1 = { 0x9C54531DAD5396B3ull, 0xD75CB969AE36C967ull };
+  const MURMUR22_CTX c2 = { 0xAD9CACEA526A6539ull, 0xC69A72D2E2ABAC4Dull };
+  const MURMUR22_CTX c3 = { 0xB54DCA3146A5496Dull, 0x93A68CE45D5AB273ull };
+  const MURMUR22_CTX c4 = { 0xD8DA264EB198DA47ull, 0xB4ED6A237327239Bull };
 
-  MURMUR22_CTX seed = { s ^ c4.hi, s ^ c4.lo };
+       
+       
+       
+      
+  MURMUR22_CTX seed = { s, s };
 
-  const MURMUR22_CTX *data = (const MURMUR22_CTX *)key;
+  const uint8_t *p = (const uint8_t *)key;
+
   int len2 = len;
   while (true) {
       if (len < 64)
         {
-          if (len < 4)
-          {
-              if (len != 0)
-              {
-                  MurMix22 (c1, _wyr4 (data, len), seed);
-                  MurMix22 (c4, len2, seed);
-              }
-              else
-              {
-                  MurMix22 (c4, len2, seed);
-              }
-              return seed.lo ^ seed.hi;
-          }
-          if (len <= 8)
-          {
-              MurMix22 (c1, _wyr8 (data, len), seed);
-              MurMix22 (c4, len2, seed);
-              return seed.lo ^ seed.hi;
-          }
-          if (len <= 12)
-          {
-              MurMix22 (c1, _wyr12 (data, len), seed);
-              MurMix22 (c4, len2, seed);
-              return seed.lo ^ seed.hi;
-          }
-          if (len <= 16)
-          {
-              MurMix22 (c1, _wyr16 (data, len), seed);
-              MurMix22 (c4, len2, seed);
-              return seed.lo ^ seed.hi;
-          }   
+          while (len >= 16)
+            {
+              MurMix22 (c1, _wyr16 (p, 16), seed);
+              p += 16;
+              len -= 16;
+            }
 
-          MurMix22 (c1, _wyr16 (data, 16), seed);
-          len -= 16;
-          data++;
-          continue;
-      }   
+          if (len == 0)
+            {
+              MurMix22 (c4, { (uint64_t)len2, 0xD58973A518CECB6Dull }, seed);
+              return MurmurHash22_Finalize(seed);
+            }
+          if (len < 4)
+            {
+              MurMix22 (c1, { _wyr3 (p, len), 0xE9D8CE56ED95A589ull }, seed);
+            }
+          else if (len <= 8)
+            {
+              MurMix22 (c1, { _wyr8 (p, len), 0xE9D8CE56ED95A589ull }, seed);
+            }
+          else if (len <= 12)
+            {
+              MurMix22 (c1, _wyr12 (p, len), seed);
+            }
+          else
+            { // 13..16
+              MurMix22 (c1, _wyr16 (p, len), seed);
+            }
+          MurMix22 (c4, { (uint64_t)len2, 0xD58973A518CECB6Dull }, seed);
+          return MurmurHash22_Finalize(seed);
+      } 
       MURMUR22_CTX see1 = seed;
       MURMUR22_CTX see2 = seed;
       MURMUR22_CTX see3 = seed;
       do
         {
-          MurMix22 (c1, data[0], seed);
-          MurMix22 (c2, data[1], see1);
-          MurMix22 (c3, data[2], see2);
-          MurMix22 (c4, data[3], see3);
-          data += 4;
-          len -= 64;
+          MurMix22 (c1, (p + 16 * 0), seed);
+          MurMix22 (c2, (p + 16 * 1), see1);
+          MurMix22 (c3, (p + 16 * 2), see2);
+          MurMix22 (c4, (p + 16 * 3), see3);
+          std::swap (seed, see1);
+          std::swap (see2, see3);
+          p += 4*16;
+          len -= 4 * 16;
         }
       while (len >= 64);
       seed.lo ^= see1.lo ^ see2.lo ^ see3.lo;

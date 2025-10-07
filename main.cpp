@@ -329,7 +329,7 @@ HashInfo g_hashes[] =
 { xxHash32_test,        32, 0xBA88B743, "xxHash32",    "xxHash, 32-bit for x86", POOR, {} },
 { MurmurHash1_test,     32, 0x9EA7D056, "Murmur1",     "MurmurHash1", POOR, {0xc6a4a793} /* !! */ },
 { MurmurHash11_test,    32, 0x0D770CF7, "Murmur11",     "MurmurHash11", POOR, {0xc6a4a793} /* !! */ },
-{ MurmurHash22_test,    64, 0x4E50072B, "Murmur22",     "MurmurHash22", POOR, {0xc6a4a793} /* !! */ },
+{ MurmurHash22_test,    64, 0x1F0E2377, "Murmur22",     "MurmurHash22", POOR, {0xc6a4a793} /* !! */ },
 { MurmurHash2_test,     32, 0x27864C1E, "Murmur2",     "MurmurHash2 for x86, 32-bit", POOR,
   {0x10} /* !! */ },
 { MurmurHash2A_test,    32, 0x7FBD4396, "Murmur2A",    "MurmurHash2A for x86, 32-bit", POOR,
