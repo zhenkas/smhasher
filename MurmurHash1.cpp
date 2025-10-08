@@ -374,12 +374,74 @@ _wyr16 (const uint8_t *p, uint32_t k)
   uint64_t hi = load64u (p + k - 8);
   return { lo, hi };
 }
+static inline uint64_t
+_rot64 (const uint64_t x, int k)
+{
+  return (x << k) | (x >> (64 - k));
+}
 
-static inline void
+
+    static inline void
 MurMix22 (const MURMUR22_CTX &c, const MURMUR22_CTX &d, MURMUR22_CTX &s)
 {
+//   uint64_t v1 = c.lo ^ d.lo ^ s.lo;
+//   uint64_t v2 = c.hi ^ d.hi ^ s.hi;
+// 
+//   uint64_t v1h = v1^(v1 >> 32);
+//   uint64_t v2h = v2^(v2 >> 32);
+// 
+//   uint64_t r1 = v1 * v2h;
+//   uint64_t r2 = v2 * v1h;
+//   s.lo ^= r1 ^_rot64 (r2, 42);
+//   s.hi = r2;
   s.lo ^= _umul128 (c.lo ^ s.lo ^ d.lo, c.hi ^ s.hi ^ d.hi, &s.hi);
 }
+
+static inline void
+MurMix22x4 (const MURMUR22_CTX *c, const uint8_t *d, MURMUR22_CTX *s)
+{
+    for (int i = 0; i < 4; i++)
+    {
+        MurMix22 (c[i], _wyr16 (d + i * 16, 16), s[i]);
+    }
+//     std::swap (s[0], s[1]);
+//     std::swap (s[2], s[3]);
+}
+
+static inline void
+MurMix22x8 (const MURMUR22_CTX * c, const uint8_t *d, MURMUR22_CTX * s)
+{
+    /*
+      uint64_t v1 = c.lo ^ d.lo ^ s.lo;
+      uint64_t v2 = c.hi ^ d.hi ^ s.hi;
+
+      uint64_t v1h = v1^(v1 >> 32);
+      uint64_t v2h = v2^(v2 >> 32);
+
+      uint64_t r1 = v1 * v2h;
+      uint64_t r2 = v2 * v1h;
+      s.lo ^= r1 ^_rot64 (r2, 42);
+      s.hi = r2;
+    */
+  __m512i dl = _mm512_loadu_si512 ((const __m512i *)d);
+  __m512i dh = _mm512_loadu_si512 ((const __m512i *)d + 1);
+  __m512i cl = _mm512_loadu_si512 ((const __m512i *)c);
+  __m512i ch = _mm512_loadu_si512 ((const __m512i *)c + 1);
+  __m512i sl = _mm512_loadu_si512 ((const __m512i *)s);
+  __m512i sh = _mm512_loadu_si512 ((const __m512i *)s + 1);
+  __m512i v1 = _mm512_xor_si512 (_mm512_xor_si512 (cl, sl), dl);
+  __m512i v2 = _mm512_xor_si512 (_mm512_xor_si512 (ch, sh), dh);
+  __m512i v1h = _mm512_xor_si512 (v1, _mm512_srli_epi64 (v1, 32));
+  __m512i v2h = _mm512_xor_si512 (v2, _mm512_srli_epi64 (v2, 32));
+  __m512i r1 = _mm512_mullo_epi64 (v1, v2h);
+  __m512i r2 = _mm512_mullo_epi64 (v2, v1h);
+  sl = _mm512_xor_si512 (sl, _mm512_xor_si512 (r1, _mm512_ror_epi64 (r2, 42)));
+  sh = r2;
+
+  _mm512_storeu_si512 ((__m512i *)s, sl);
+  _mm512_storeu_si512 ((__m512i *)s + 1, sh);
+}
+
 static inline uint64_t
 MurmurHash22_Finalize (const MURMUR22_CTX &s)
 {
@@ -389,70 +451,91 @@ MurmurHash22_Finalize (const MURMUR22_CTX &s)
 uint64_t
 MurmurHash22 (const void *key, int len, uint64_t s)
 {
-  const MURMUR22_CTX c1 = { 0x9C54531DAD5396B3ull, 0xD75CB969AE36C967ull };
-  const MURMUR22_CTX c2 = { 0xAD9CACEA526A6539ull, 0xC69A72D2E2ABAC4Dull };
-  const MURMUR22_CTX c3 = { 0xB54DCA3146A5496Dull, 0x93A68CE45D5AB273ull };
-  const MURMUR22_CTX c4 = { 0xD8DA264EB198DA47ull, 0xB4ED6A237327239Bull };
-
-       
-       
-       
+  const MURMUR22_CTX c[] = {
+    { 0x9C54531DAD5396B3ull, 0xD75CB969AE36C967ull },
+    { 0xAD9CACEA526A6539ull, 0xC69A72D2E2ABAC4Dull },
+    { 0xB54DCA3146A5496Dull, 0x93A68CE45D5AB273ull },
+    { 0xD8DA264EB198DA47ull, 0xB4ED6A237327239Bull },
+    { 0xE92B6C56CD6D2745ull, 0x9B38D394B2B465C5ull },
+    { 0xB631D69D4656526Dull, 0xB6C5BA2B694D9289ull },
+    { 0xA4E4E323A5A4DA97ull, 0x89169CB124EB5C6Dull },
+    { 0x925C59128A32B9C9ull, 0xD4A769C9D5C6AB27ull },    
+  };              
       
-  MURMUR22_CTX seed = { s, s };
+  MURMUR22_CTX seed[8];
+  seed[0] = { s, s };
 
   const uint8_t *p = (const uint8_t *)key;
 
   int len2 = len;
   while (true) {
-      if (len < 64)
+      if (len < 128)
         {
+//           if (len >= 64) {
+//               seed[1] = seed[0];
+//               seed[2] = seed[0];
+//               seed[3] = seed[0];
+//               MurMix22x4 (c, p, seed);
+//               seed[0].lo ^= seed[1].lo ^ seed[2].lo ^ seed[3].lo;
+//               seed[0].hi ^= seed[1].hi ^ seed[2].hi ^ seed[3].hi;
+//               p += 4 * 16;
+//               len -= 4 * 16;
+//           }
           while (len >= 16)
             {
-              MurMix22 (c1, _wyr16 (p, 16), seed);
+              MurMix22 (c[0], _wyr16 (p, 16), seed[0]);
               p += 16;
               len -= 16;
             }
 
           if (len == 0)
             {
-              MurMix22 (c4, { (uint64_t)len2, 0xD58973A518CECB6Dull }, seed);
-              return MurmurHash22_Finalize(seed);
+              MurMix22 (c[3], { (uint64_t)len2, 0xD58973A518CECB6Dull }, seed[0]);
+              return MurmurHash22_Finalize(seed[0]);
             }
           if (len < 4)
             {
-              MurMix22 (c1, { _wyr3 (p, len), 0xE9D8CE56ED95A589ull }, seed);
+              MurMix22 (c[0], { _wyr3 (p, len), 0xE9D8CE56ED95A589ull }, seed[0]);
             }
           else if (len <= 8)
             {
-              MurMix22 (c1, { _wyr8 (p, len), 0xE9D8CE56ED95A589ull }, seed);
+              MurMix22 (c[0], { _wyr8 (p, len), 0xE9D8CE56ED95A589ull }, seed[0]);
             }
           else if (len <= 12)
             {
-              MurMix22 (c1, _wyr12 (p, len), seed);
+              MurMix22 (c[0], _wyr12 (p, len), seed[0]);
             }
           else
             { // 13..16
-              MurMix22 (c1, _wyr16 (p, len), seed);
+              MurMix22 (c[0], _wyr16 (p, len), seed[0]);
             }
-          MurMix22 (c4, { (uint64_t)len2, 0xD58973A518CECB6Dull }, seed);
-          return MurmurHash22_Finalize(seed);
+          MurMix22 (c[3], { (uint64_t)len2, 0xD58973A518CECB6Dull }, seed[0]);
+          return MurmurHash22_Finalize(seed[0]);
       } 
-      MURMUR22_CTX see1 = seed;
-      MURMUR22_CTX see2 = seed;
-      MURMUR22_CTX see3 = seed;
+      seed[1] = seed[0];
+      seed[2] = seed[0];
+      seed[3] = seed[0];
+      seed[4] = seed[0];
+      seed[5] = seed[0];
+      seed[6] = seed[0];
+      seed[7] = seed[0];
       do
         {
-          MurMix22 (c1, (p + 16 * 0), seed);
-          MurMix22 (c2, (p + 16 * 1), see1);
-          MurMix22 (c3, (p + 16 * 2), see2);
-          MurMix22 (c4, (p + 16 * 3), see3);
-          std::swap (seed, see1);
-          std::swap (see2, see3);
-          p += 4*16;
-          len -= 4 * 16;
+          MurMix22x8 (c, p, seed);
+//           MurMix22 (c[0], (p + 16 * 0), seed[0]);
+//           MurMix22 (c[1], (p + 16 * 1), seed[1]);
+//           MurMix22 (c[2], (p + 16 * 2), seed[2]);
+//           MurMix22 (c[3], (p + 16 * 3), seed[3]);
+          //std::swap (seed[0], seed[1]);
+          //std::swap (seed[2], seed[3]);
+          p += 8*16;
+          len -= 8 * 16;
         }
-      while (len >= 64);
-      seed.lo ^= see1.lo ^ see2.lo ^ see3.lo;
-      seed.hi ^= see1.hi ^ see2.hi ^ see3.hi;
+      while (len >= 128);
+
+      MurMix22x4 (c, (const uint8_t*) (seed+4), seed);
+      MurMix22 (c[4], seed[1], seed[0]);
+      MurMix22 (c[5], seed[2], seed[3]);
+      MurMix22 (c[6], seed[3], seed[0]);
   }
 }

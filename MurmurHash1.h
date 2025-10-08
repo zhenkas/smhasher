@@ -36,7 +36,7 @@ struct MURMUR11_CTX
         uint32_t hi;
     };
     uint64_t val;
-  } Seed;
+  } Seed;  
   MURMUR11_CTX (uint32_t seed) : Seed{ seed } {}
   MURMUR11_CTX (uint32_t lo, uint32_t hi) : Seed{ lo, hi} {}
 };
@@ -51,6 +51,7 @@ struct MURMUR22_CTX
 {
     uint64_t lo;
     uint64_t hi;
+    MURMUR22_CTX () = default;
     MURMUR22_CTX (const uint8_t *p) { memcpy (this, p, 16); }    
     MURMUR22_CTX (uint64_t l, uint64_t h) : lo (l), hi (h) {}
 };

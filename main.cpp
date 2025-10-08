@@ -1165,6 +1165,7 @@ void test ( hashfunc<hashtype> hash, HashInfo* info )
     if(extra) {
       result &= AvalancheTest< Blob<1280>,hashtype > (hash,300000,verbose);
       result &= AvalancheTest< Blob<1536>,hashtype > (hash,300000,verbose);
+      result &= AvalancheTest< Blob<2048>,hashtype > (hash,300000,verbose);
     }
 
     if(!result) printf("*********FAIL*********\n");
